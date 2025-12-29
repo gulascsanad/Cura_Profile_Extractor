@@ -95,7 +95,7 @@ The extracted JSON contains:
   },
   "metadata": {          // Extraction info
     "cura_version": "5.11",
-    "extracted_at": "2024-12-29T...",
+    "extracted_at": "2025-12-29T...",
     ...
   },
   "preferences": {...},  // Global Cura preferences
