@@ -1,0 +1,158 @@
+{
+  "_summary": {
+    "machine_name": "Ender 3 Pro",
+    "cura_version": "5.11",
+    "extracted_at": "2025-12-29T14:30:00",
+    "extractor_version": "1.3.0",
+    "manufacturer": "creality",
+    "quality_profile": "Standard",
+    "total_settings": 847,
+    "custom_profiles": 3,
+    "plugins_installed": 5
+  },
+  "_key_settings": {
+    "layer_height": 0.2,
+    "line_width": 0.4,
+    "wall_line_count": 3,
+    "top_layers": 4,
+    "bottom_layers": 4,
+    "infill_sparse_density": 20,
+    "infill_pattern": "cubic",
+    "material_print_temperature": 200,
+    "material_bed_temperature": 60,
+    "speed_print": 50,
+    "speed_travel": 150,
+    "retraction_enable": true,
+    "retraction_amount": 0.8,
+    "retraction_speed": 45,
+    "adhesion_type": "skirt",
+    "support_enable": false
+  },
+  "metadata": {
+    "cura_version": "5.11",
+    "extracted_at": "2025-12-29T14:30:00.123456",
+    "machine": "Ender 3 Pro",
+    "extractor_version": "1.3.0"
+  },
+  "preferences": {
+    "general": {
+      "visible_settings": "layer_height;infill_sparse_density;support_enable;adhesion_type",
+      "theme": "cura-light",
+      "language": "en_US"
+    }
+  },
+  "machine": {
+    "name": "Ender 3 Pro",
+    "base_definition": "creality_ender3pro",
+    "detected_manufacturer": "creality",
+    "inheritance_chain": [
+      {
+        "name": "creality_ender3pro",
+        "file": "C:/Program Files/UltiMaker Cura 5.11.0/share/cura/resources/definitions/creality_ender3pro.def.json"
+      },
+      {
+        "name": "creality_base",
+        "file": "C:/Program Files/UltiMaker Cura 5.11.0/share/cura/resources/definitions/creality_base.def.json"
+      },
+      {
+        "name": "fdmprinter",
+        "file": "C:/Program Files/UltiMaker Cura 5.11.0/share/cura/resources/definitions/fdmprinter.def.json"
+      }
+    ],
+    "settings": {
+      "machine_name": {
+        "default_value": "Ender 3 Pro",
+        "source": "creality_ender3pro.def.json"
+      },
+      "machine_width": {
+        "default_value": 220,
+        "source": "creality_ender3pro.def.json"
+      },
+      "machine_depth": {
+        "default_value": 220,
+        "source": "creality_ender3pro.def.json"
+      },
+      "machine_height": {
+        "default_value": 250,
+        "source": "creality_ender3pro.def.json"
+      },
+      "machine_heated_bed": {
+        "default_value": true,
+        "source": "creality_base.def.json"
+      }
+    }
+  },
+  "gcode": {
+    "start_gcode": [
+      "; Ender 3 Pro Start G-code",
+      "G28 ; Home all axes",
+      "G29 P1 ; Probe mesh",
+      "G29 A ; Activate UBL",
+      "G92 E0 ; Reset extruder",
+      "G1 Z2.0 F3000 ; Move Z up",
+      "G1 X0.1 Y20 Z0.3 F5000.0 ; Move to start",
+      "G1 X0.1 Y200.0 Z0.3 F1500.0 E15 ; Draw line",
+      "G1 X0.4 Y200.0 Z0.3 F5000.0 ; Move over",
+      "G1 X0.4 Y20 Z0.3 F1500.0 E30 ; Draw line",
+      "G92 E0 ; Reset extruder",
+      "G1 Z2.0 F3000 ; Move Z up"
+    ],
+    "end_gcode": [
+      "; Ender 3 Pro End G-code",
+      "G91 ; Relative positioning",
+      "G1 E-2 F2700 ; Retract",
+      "G1 Z10 F3000 ; Raise Z",
+      "G90 ; Absolute positioning",
+      "G1 X0 Y220 F3000 ; Present print",
+      "M106 S0 ; Fan off",
+      "M104 S0 ; Hotend off",
+      "M140 S0 ; Bed off",
+      "M84 ; Motors off"
+    ],
+    "source": "C:/Users/User/AppData/Roaming/cura/5.11/definition_changes/Ender+3+Pro_settings.inst.cfg"
+  },
+  "extruders": {
+    "extruder_0": {
+      "definition": "creality_base_extruder_0",
+      "settings": {
+        "machine_nozzle_size": 0.4,
+        "material_diameter": 1.75
+      }
+    }
+  },
+  "quality_builtin": {
+    "draft": {
+      "layer_height": 0.28,
+      "source": "creality_base_draft.inst.cfg"
+    },
+    "normal": {
+      "layer_height": 0.2,
+      "source": "creality_base_normal.inst.cfg"
+    },
+    "fine": {
+      "layer_height": 0.12,
+      "source": "creality_base_fine.inst.cfg"
+    }
+  },
+  "quality_custom": {
+    "PLA Standard": {
+      "layer_height": 0.2,
+      "infill_sparse_density": 20,
+      "material_print_temperature": 200,
+      "source": "PLA+Standard.inst.cfg"
+    },
+    "PETG Strong": {
+      "layer_height": 0.2,
+      "infill_sparse_density": 40,
+      "material_print_temperature": 240,
+      "source": "PETG+Strong.inst.cfg"
+    }
+  },
+  "plugins": [
+    "CuraBackup",
+    "MeshTools",
+    "PrinterSettingsPlugin",
+    "OctoPrintPlugin",
+    "CalibrationShapes"
+  ]
+}

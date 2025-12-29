@@ -1,0 +1,17 @@
+# Cura Profile Extractor - Requirements
+# ======================================
+# 
+# This tool has NO external dependencies.
+# It uses only Python standard library modules:
+#   - tkinter (GUI)
+#   - json, configparser (file parsing)
+#   - pathlib, os, sys (filesystem)
+#   - argparse (CLI)
+#   - datetime, re, urllib.parse (utilities)
+#
+# Just run it:
+#   python cura_profile_extractor.py
+#
+# Requires: Python 3.7+
+# Tkinter is included with most Python installations.
+# If missing on Linux: sudo apt install python3-tk
