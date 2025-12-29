@@ -255,7 +255,7 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 ## Changelog
 
-### v1.3.0 (2024-12-29)
+### v1.3.0 (2025-12-29)
 - Added: Auto-population of Advanced Fallbacks fields on Validate & Discover
 - Added: Right-click context menus (Cut/Copy/Paste/Select All) on all text fields
 - Added: Help / Instructions button with comprehensive documentation popup
